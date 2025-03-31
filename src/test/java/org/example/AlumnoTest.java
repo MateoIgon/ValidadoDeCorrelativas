@@ -2,12 +2,14 @@ package org.example;
 
 import junit.framework.TestCase;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 
 public class AlumnoTest extends TestCase {
     public void test() {
-        ArrayList<Materia> sinCorrelativas = new ArrayList<>();
+        Set<Materia> sinCorrelativas = new HashSet<>();
 
         Materia am = new Materia();
         am.setCorrelativas(sinCorrelativas);
@@ -16,38 +18,57 @@ public class AlumnoTest extends TestCase {
         syo.setCorrelativas(sinCorrelativas);
 
         Materia am2 = new Materia();
-        ArrayList<Materia> correlativasam2 = new ArrayList<>();
+        HashSet<Materia> correlativasam2 = new HashSet<>();
         correlativasam2.add(am);
         am2.setCorrelativas(correlativasam2);
 
         Materia ads = new Materia();
-        ArrayList<Materia> correlativasads = new ArrayList<>();
+        HashSet<Materia> correlativasads = new HashSet<>();
         correlativasads.add(syo);
         ads.setCorrelativas(correlativasads);
 
+        Materia dds = new Materia();
+        HashSet<Materia> correlativasdds = new HashSet<>();
+        correlativasdds.add(ads);
+        dds.setCorrelativas(correlativasdds);
+
         Alumno mateo = new Alumno();
-        ArrayList<Materia> materiasAprobadas = new ArrayList<>();
+        HashSet<Materia> materiasAprobadas = new HashSet<>();
         materiasAprobadas.add(am);
         mateo.setMateriasAprobadas(materiasAprobadas);
 
-        ArrayList<Materia> materiasAInscribir = new ArrayList<>();
+        HashSet<Materia> materiasAInscribir = new HashSet<>();
         materiasAInscribir.add(am2);
-        materiasAInscribir.add(ads);
+        materiasAInscribir.add(syo);
         mateo.setMateriasAInscribir(materiasAInscribir);
 
         Alumno tomas = new Alumno();
-        ArrayList<Materia> materiasAprobadasTomas = new ArrayList<>();
+        HashSet<Materia> materiasAprobadasTomas = new HashSet<>();
         materiasAprobadasTomas.add(am);
         materiasAprobadasTomas.add(syo);
+        materiasAprobadasTomas.add(ads);
         tomas.setMateriasAprobadas(materiasAprobadasTomas);
 
-        ArrayList<Materia> materiasAInscribirTomas = new ArrayList<>();
+        HashSet<Materia> materiasAInscribirTomas = new HashSet<>();
         materiasAInscribirTomas.add(am2);
-        materiasAInscribirTomas.add(ads);
+        materiasAInscribirTomas.add(dds);
         tomas.setMateriasAInscribir(materiasAInscribirTomas);
 
-        Inscripcion siu = new Inscripcion();
-        assertFalse(siu.aprobada(mateo));
-        assertTrue(siu.aprobada(tomas));
+        Alumno lucas = new Alumno();
+        HashSet<Materia> materiasAprobadasLucas = new HashSet<>();
+        materiasAprobadasLucas.add(am);
+        lucas.setMateriasAprobadas(materiasAprobadasLucas);
+
+        HashSet<Materia> materiasAInscribirLucas = new HashSet<>();
+        materiasAInscribirLucas.add(am2);
+        materiasAInscribirLucas.add(ads);
+        lucas.setMateriasAInscribir(materiasAInscribirLucas);
+
+
+
+//        Inscripcion siu = new Inscripcion();
+        assertTrue(mateo.inscribirse());
+        assertFalse(lucas.inscribirse());
+        assertTrue(tomas.inscribirse());
     }
 }
